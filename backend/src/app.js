@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const port = 3000;
 const userRoutes = require("./routes/userRoutes");
@@ -8,9 +9,12 @@ const paymentRoutes = require("./routes/paymentRoutes");
 
 app.use(express.json());
 
+// Serve static files from the frontend directory
+app.use(express.static(path.join(__dirname, "../../frontend")));
+
 // Homepage route
 app.get("/", (req, res) => {
-    res.send("Welcome to the Car Rental System");
+    res.sendFile(path.join(__dirname, "../../frontend/home.html"));
 });
 
 // Users API route
