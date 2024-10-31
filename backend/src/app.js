@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-const userRoutes = require("./routes/userRoutes"); // Adjust path as needed
-const carRoutes = require("./routes/carRoutes"); // Adjust path as needed
+const userRoutes = require("./routes/userRoutes");
+const carRoutes = require("./routes/carRoutes");
+const rentalRoutes = require("./routes/rentalRoutes");
 
 app.use(express.json());
 
@@ -12,10 +13,13 @@ app.get("/", (req, res) => {
 });
 
 // Users API route
-app.use("/users", userRoutes); // All user routes are now under /users
+app.use("/users", userRoutes);
 
 // Cars API route
-app.use("/cars", carRoutes); // All car routes are now under /cars
+app.use("/cars", carRoutes);
+
+// Rentals API route
+app.use("/rentals", rentalRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
