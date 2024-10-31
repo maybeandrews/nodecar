@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Car Rental App</title>
+        <title>My Rentals</title>
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
@@ -29,31 +29,14 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Left Side (Wallpaper) -->
-            <div class="left-side">
-                <div class="hero">
-                    <h2>Rent a Car Today</h2>
-                    <p>Choose from a wide range of cars at affordable rates.</p>
-                    <input
-                        type="date"
-                        id="rentalDate"
-                        class="modern-calendar"
-                    />
-                    <a href="#" class="btn" id="browseCars">Browse Cars</a>
-                </div>
-            </div>
-
-            <!-- Right Side (Available Cars) -->
-            <div class="right-side">
-                <section class="available-cars">
-                    <div class="container">
-                        <h2>Available Cars</h2>
-                        <div class="car-list">
-                            <!-- Car items will be dynamically inserted here by JavaScript -->
-                        </div>
+            <section class="rentals">
+                <div class="container">
+                    <h2 class="centered-title">My Rentals</h2>
+                    <div class="rental-list">
+                        <!-- Rental items will be dynamically inserted here by JavaScript -->
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
         </div>
 
         <!-- Footer -->
@@ -67,7 +50,6 @@
                 </ul>
             </div>
         </footer>
-
-        <script src="index.js"></script>
+        <script src="rentalspage.js"></script>
     </body>
 </html>
