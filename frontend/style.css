@@ -55,8 +55,6 @@ header nav ul li a:hover {
 
 .main-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: calc(100vh - 60px); /* Adjust height based on header height */
 }
 
@@ -378,12 +376,4 @@ footer .social-media li a:hover {
     font-size: 24px;
     margin-bottom: 20px;
     color: #333;
-}
-
-.centered-title {
-    font-size: 36px;
-    margin-bottom: 20px;
-    color: #ff6600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }

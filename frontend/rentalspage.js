@@ -29,10 +29,9 @@ function displayRentals(rentals) {
         rentalItem.classList.add("rental-item");
 
         const rentalDate = new Date(rental.rental_date).toLocaleDateString();
-        const returnDate = new Date(rental.return_date).toLocaleDateString();
 
         rentalItem.innerHTML = `
-            <h3>${rental.car_name} (${rentalDate} - ${returnDate})</h3>
+            <h3>${rental.car_name} (Rented on: ${rentalDate})</h3>
             <a href="#" class="btn" data-rental-id="${rental.id}">Return Car</a>
         `;
 

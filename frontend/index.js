@@ -44,7 +44,7 @@ function displayAvailableCars(cars) {
             <img src="${car.image}" alt="${car.name}">
             <div class="car-details">
                 <h3>${car.name} (${car.year})</h3>
-                <a href="#" class="btn" data-car-id="${car.id}">Rent Now - $${car.daily_rental_rate}</a>
+                <a href="#" class="btn" data-car-id="${car.id}">Rent Now - ₹${car.daily_rental_rate}</a>
             </div>
         `;
 
