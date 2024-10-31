@@ -10,79 +10,78 @@ class Payment {
         this.payment_method = payment_method;
     }
 
-    static create(
-        { rental_id, amount, payment_date, payment_method },
-        callback
-    ) {
-        const sql = `INSERT INTO Payments (rental_id, amount, payment_date, payment_method) VALUES (?, ?, ?, ?)`;
-        db.run(
-            sql,
-            [rental_id, amount, payment_date, payment_method],
-            function (err) {
-                if (err) {
-                    return callback(err);
+    static create({ rental_id, amount, payment_date, payment_method }) {
+        return new Promise((resolve, reject) => {
+            const sql = `INSERT INTO Payments (rental_id, amount, payment_date, payment_method) VALUES (?, ?, ?, ?)`;
+            db.run(
+                sql,
+                [rental_id, amount, payment_date, payment_method],
+                function (err) {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve(
+                        new Payment(
+                            this.lastID,
+                            rental_id,
+                            amount,
+                            payment_date,
+                            payment_method
+                        )
+                    );
                 }
-                callback(
-                    null,
-                    new Payment(
-                        this.lastID,
-                        rental_id,
-                        amount,
-                        payment_date,
-                        payment_method
-                    )
-                );
-            }
-        );
-    }
-
-    static findById(id, callback) {
-        const sql = `SELECT * FROM Payments WHERE id = ?`;
-        db.get(sql, [id], (err, row) => {
-            if (err) {
-                return callback(err);
-            }
-            if (!row) {
-                return callback(new Error("Payment not found"));
-            }
-            callback(
-                null,
-                new Payment(
-                    row.id,
-                    row.rental_id,
-                    row.amount,
-                    row.payment_date,
-                    row.payment_method
-                )
             );
         });
     }
 
-    static update(
-        id,
-        { rental_id, amount, payment_date, payment_method },
-        callback
-    ) {
-        const sql = `UPDATE Payments SET rental_id = ?, amount = ?, payment_date = ?, payment_method = ? WHERE id = ?`;
-        db.run(
-            sql,
-            [rental_id, amount, payment_date, payment_method, id],
-            function (err) {
+    static findById(id) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT * FROM Payments WHERE id = ?`;
+            db.get(sql, [id], (err, row) => {
                 if (err) {
-                    return callback(err);
+                    return reject(err);
                 }
-                callback(null, this.changes);
-            }
-        );
+                if (!row) {
+                    return reject(new Error("Payment not found"));
+                }
+                resolve(
+                    new Payment(
+                        row.id,
+                        row.rental_id,
+                        row.amount,
+                        row.payment_date,
+                        row.payment_method
+                    )
+                );
+            });
+        });
     }
 
-    static delete(id, callback) {
-        const sql = `DELETE FROM Payments WHERE id = ?`;
-        db.run(sql, [id], function (err) {
-            if (err) {
-                return callback(err);
-            }
-            callback(null, this.changes);
+    static update(id, { rental_id, amount, payment_date, payment_method }) {
+        return new Promise((resolve, reject) => {
+            const sql = `UPDATE Payments SET rental_id = ?, amount = ?, payment_date = ?, payment_method = ? WHERE id = ?`;
+            db.run(
+                sql,
+                [rental_id, amount, payment_date, payment_method, id],
+                function (err) {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve(this.changes);
+                }
+            );
+        });
+    }
+
+    static delete(id) {
+        return new Promise((resolve, reject) => {
+            const sql = `DELETE FROM Payments WHERE id = ?`;
+            db.run(sql, [id], function (err) {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(this.changes);
+            });
         });
     }
 }

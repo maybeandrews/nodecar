@@ -4,6 +4,7 @@ const port = 3000;
 const userRoutes = require("./routes/userRoutes");
 const carRoutes = require("./routes/carRoutes");
 const rentalRoutes = require("./routes/rentalRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 
 app.use(express.json());
 
@@ -20,6 +21,9 @@ app.use("/cars", carRoutes);
 
 // Rentals API route
 app.use("/rentals", rentalRoutes);
+
+// Payments API route
+app.use("/payments", paymentRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
