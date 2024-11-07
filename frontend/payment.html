@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Payment</title>
+        <link rel="stylesheet" href="paymentstyle.css" />
+    </head>
+    <body>
+        <script>
+            // Check if the user is logged in
+            if (!localStorage.getItem("userId")) {
+                window.location.href = "auth.html";
+            }
+        </script>
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <h1 class="logo">Car Rental</h1>
+                <nav>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="rentals.html">My Rentals</a></li>
+                        <li><a href="#" id="logout">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="payment">
+                <div class="container">
+                    <h2 id="payment-title">Payment</h2>
+                    <form id="paymentForm">
+                        <input type="hidden" id="carId" name="carId" />
+                        <input type="hidden" id="userId" name="userId" />
+                        <input
+                            type="hidden"
+                            id="returnDate"
+                            name="returnDate"
+                        />
+                        <input type="hidden" id="totalCost" name="totalCost" />
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number:</label>
+                            <input
+                                type="text"
+                                id="cardNumber"
+                                name="cardNumber"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date:</label>
+                            <input
+                                type="text"
+                                id="expiryDate"
+                                name="expiryDate"
+                                placeholder="MM/YY"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV:</label>
+                            <input type="text" id="cvv" name="cvv" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input
+                                type="text"
+                                id="amount"
+                                name="amount"
+                                readonly
+                            />
+                        </div>
+                        <button type="submit" class="btn">Pay Now</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>&copy; 2023 Car Rental. All rights reserved.</p>
+                <ul class="social-media">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </footer>
+        <script src="payment.js"></script>
+    </body>
+</html>

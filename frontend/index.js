@@ -44,7 +44,7 @@ function displayAvailableCars(cars) {
             <img src="${car.image}" alt="${car.name}">
             <div class="car-details">
                 <h3>${car.name} (${car.year})</h3>
-                <a href="#" class="btn" data-car-id="${car.id}">Rent Now - ₹${car.daily_rental_rate}</a>
+                <a href="#" class="btn" data-car-id="${car.id}" data-total-cost="${car.daily_rental_rate}">Rent Now - ₹${car.daily_rental_rate}</a>
             </div>
         `;
 
@@ -53,44 +53,19 @@ function displayAvailableCars(cars) {
 
     // Add event listeners to "Rent Now" buttons
     document.querySelectorAll(".btn").forEach((button) => {
-        button.addEventListener("click", handleRentNow);
+        button.addEventListener("click", redirectToPayment);
     });
 }
 
-async function handleRentNow(event) {
+function redirectToPayment(event) {
     event.preventDefault();
     const carId = event.target.getAttribute("data-car-id");
+    const totalCost = event.target.getAttribute("data-total-cost");
     const userId = localStorage.getItem("userId"); // Get the actual user ID from localStorage
     const returnDate = "2023-12-31"; // Replace with actual return date
-    const totalCost = 100; // Replace with actual total cost
 
-    try {
-        const response = await fetch("/rentals", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                user_id: userId,
-                car_id: carId,
-                return_date: returnDate,
-                total_cost: totalCost,
-                status: "Rented",
-            }),
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || "Failed to rent car");
-        }
-
-        const data = await response.json();
-        console.log("Car rented successfully:", data);
-        alert("Car rented successfully!");
-    } catch (error) {
-        console.error("Error renting car:", error);
-        alert(error.message);
-    }
+    // Redirect to the payment page with the necessary information
+    window.location.href = `payment.html?carId=${carId}&userId=${userId}&returnDate=${returnDate}&totalCost=${totalCost}`;
 }
 
 function handleLogout(event) {
